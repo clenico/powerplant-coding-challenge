@@ -1,15 +1,11 @@
 import unittest
+import json
 from app.controller.load_planner import LoadPlannerGreedy
 from app.utils.parser import ApiProductionPlanPayloadParser
 from app.utils.merit_manager import MeritSortManager, CostComputer
-import json
-from app.schemas import (
-    ApiProductionPlanPayload,
-    FuelsCost,
-    PowerplantData,
-    PowerplantType,
-)
+from tests.const import PATH_PAYLOAD_3, PATH_RESPONSE_3
 from app.controller.load_planner import LoadPlannerGreedy
+
 class TestLoadPlannerGreedy(unittest.TestCase):
     def setUp(self):
         self.planner = LoadPlannerGreedy()
@@ -19,12 +15,10 @@ class TestLoadPlannerGreedy(unittest.TestCase):
 
     def test_load_planner_example_3(self):
         parser = ApiProductionPlanPayloadParser()
-        path_payload_example = "powerplant-coding-challenge/tests/example_payloads/payload3.json"
-        with open(path_payload_example, "r") as reader:
+        with open(PATH_PAYLOAD_3, "r") as reader:
             payload = json.load(reader)
-        path_response_example = "powerplant-coding-challenge/tests/example_payloads/response3.json"
         expected_load_production_plan = None
-        with open(path_response_example, "r") as reader:
+        with open(PATH_RESPONSE_3, "r") as reader:
             expected_load_production_plan = json.load(reader)
         api_production_payload = parser.parse(payload)
         total_load = api_production_payload.load
