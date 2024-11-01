@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import List
 from enum import Enum
 
+
 class PowerplantType(Enum):
     GASFIRED = "gasfired"
     TURBOJET = "turbojet"
@@ -21,10 +22,12 @@ class PowerplantData(BaseModel):
     pmax: float
     pmin: float
 
+
 class ApiProductionPlanPayload(BaseModel):
-    load: str
+    load: float
     fuels_cost: FuelsCost
     powerplants: List[PowerplantData]
+
 
 class PowerplantLoadPayload(BaseModel):
     name: str
