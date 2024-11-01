@@ -1,5 +1,6 @@
 import unittest
 from app.api.server import ApiServer
+from tests.const import PATH_PAYLOAD_3, PATH_RESPONSE_3
 import json
 from fastapi.testclient import TestClient
 
@@ -14,12 +15,10 @@ class TestAPIServer(unittest.TestCase):
 
     def test_example_3_payload_response(self):
         payload = None
-        path_payload_example = "powerplant-coding-challenge/tests/example_payloads/payload3.json"
-        with open(path_payload_example, "r") as reader:
+        with open(PATH_PAYLOAD_3, "r") as reader:
             payload = json.load(reader)
         expected_response: dict = None
-        path_response_example = "powerplant-coding-challenge/tests/example_payloads/response3.json"
-        with open(path_response_example, "r") as reader:
+        with open(PATH_RESPONSE_3, "r") as reader:
             expected_response = json.load(reader)
         response = self.client.post("/productionplan",
                                     json=payload)

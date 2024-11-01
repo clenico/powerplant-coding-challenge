@@ -1,5 +1,6 @@
 import unittest
 from app.utils.parser import ApiProductionPlanPayloadParser
+from tests.const import PATH_PAYLOAD_3
 import json
 from app.schemas import (
     ApiProductionPlanPayload,
@@ -11,12 +12,10 @@ from app.schemas import (
 class TestApiParser(unittest.TestCase):
     def test_parse_example_3_raise_no_error(self):
         example_payload = None
-        path_payload_example_3 = "powerplant-coding-challenge/tests/example_payloads/payload3.json"
-        with open(path_payload_example_3, "r") as reader:
+        with open(PATH_PAYLOAD_3, "r") as reader:
             example_payload = json.load(reader)
         parser = ApiProductionPlanPayloadParser()
         production_plan_payload = parser.parse(example_payload)
-        print(production_plan_payload)
         self.assertTrue(True)
 
     def test_parse_powerplant_have_correct_values(self):
