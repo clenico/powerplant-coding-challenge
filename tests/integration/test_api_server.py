@@ -3,7 +3,7 @@ from app.api.server import ApiServer
 import json
 from fastapi.testclient import TestClient
 
-class TestApiParser(unittest.TestCase):
+class TestAPIServer(unittest.TestCase):
     def setUp(self):
         app = ApiServer()
         # This is your fixture setup
