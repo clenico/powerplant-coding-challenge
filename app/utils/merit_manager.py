@@ -12,6 +12,7 @@ class AbstractCostComputer(ABC):
 
 class CostComputer(AbstractCostComputer):
     def compute(self, pp: PowerplantData, fuels_cost: FuelsCost):
+        # TODO implement testing
         cost = None
         if pp.type == PowerplantType.GASFIRED :
             cost = fuels_cost.gas / pp.efficiency
@@ -29,6 +30,7 @@ class MeritSortManager():
 
     def sort_by_lower_cost_per_MWh(self, payload: ApiProductionPlanPayload)\
         -> List[Tuple[float, PowerplantData]]:
+        # TODO implement testing
         pairs_cost_pp: list = []
         for pp in payload.powerplants:
             pairs_cost_pp.append((self.cc.compute(pp), pp))
