@@ -21,6 +21,7 @@ class LoadPlannerGreedy(AbstractLoadPlanner):
             total_load = load
             remaining_load = total_load
             production_plan = []
+
             for pp in powerplants:
                 if remaining_load == 0:
                     production_plan.append(ProductionPlanningData(
@@ -41,6 +42,8 @@ class LoadPlannerGreedy(AbstractLoadPlanner):
                         p=pp.pmax
                     ))
                     remaining_load -= pp.pmax
+            if remaining_load != 0:
+                return []
             return production_plan
 
 class LoadPlannerBruteforce(AbstractLoadPlanner):
