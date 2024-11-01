@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 
 class AbstractCostComputer(ABC):
     @abstractmethod
-    def compute(self, pp: PowerplantData) -> float:
+    def compute(self, pp: PowerplantData, fuels_cost: FuelsCost) -> float:
         pass
 
 class CostComputer(AbstractCostComputer):
@@ -25,7 +25,7 @@ class CostComputer(AbstractCostComputer):
         return cost
 
 class MeritSortManager():
-    def __init__(self, cost_computer: AbstractCostComputer):
+    def __init__(self, cost_computer: AbstractCostComputer=CostComputer()):
         self.cc = cost_computer
 
     def sort_by_lower_cost_per_MWh(self, payload: ApiProductionPlanPayload)\
@@ -33,6 +33,6 @@ class MeritSortManager():
         # TODO implement testing
         pairs_cost_pp: list = []
         for pp in payload.powerplants:
-            pairs_cost_pp.append((self.cc.compute(pp), pp))
+            pairs_cost_pp.append((self.cc.compute(pp, payload.fuels_cost), pp))
         sorted_pairs = sorted(pairs_cost_pp, key= lambda e: e[0])
         return sorted_pairs
