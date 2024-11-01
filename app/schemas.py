@@ -8,11 +8,10 @@ class PowerplantType(Enum):
     WINDTURBINE = "windturbine"
 
 
-class FuelsPricePayload(BaseModel):
+class FuelsCost(BaseModel):
     gas: float
     kerosine: float
     co2: float
-    wind: float
 
 
 class PowerplantData(BaseModel):
@@ -24,7 +23,7 @@ class PowerplantData(BaseModel):
 
 class ApiProductionPlanPayload(BaseModel):
     load: str
-    fuels: FuelsPricePayload
+    fuels_cost: FuelsCost
     powerplants: List[PowerplantData]
 
 class PowerplantLoadPayload(BaseModel):
