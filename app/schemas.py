@@ -29,6 +29,6 @@ class ApiProductionPlanPayload(BaseModel):
     powerplants: List[PowerplantData]
 
 
-class PowerplantLoadPayload(BaseModel):
+class ProductionPlanningData(BaseModel):
     name: str
     p: float
