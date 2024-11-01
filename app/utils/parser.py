@@ -28,7 +28,7 @@ class ApiProductionPlanPayloadParser:
     def parse(self, payload: dict) -> ApiProductionPlanPayload:
         self.validate(payload=payload)
         load: float = payload["load"]
-        wind_coefficient = payload["fuels"]["wind(%)"]
+        wind_coefficient = payload["fuels"]["wind(%)"] / 100
         fuels_cost = FuelsCost(
             co2=payload["fuels"]["wind(%)"],
             kerosine=payload["fuels"]["kerosine(euro/MWh)"],
@@ -38,6 +38,7 @@ class ApiProductionPlanPayloadParser:
         for powerplant in powerplants:
             if powerplant.type == PowerplantType.WINDTURBINE:
                 powerplant.pmax *= wind_coefficient
+                powerplant.pmax = round(powerplant.pmax, 1)
         return ApiProductionPlanPayload(
             load=load, fuels_cost=fuels_cost, powerplants=powerplants
         )
