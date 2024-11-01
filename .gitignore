@@ -1,2 +1,2 @@
 *.pyc
-/..gitignore.~undo-tree~
+*.~undo-tree~
