@@ -31,4 +31,5 @@ class TestLoadPlannerGreedy(unittest.TestCase):
         sorted_pairs_pp = MeritSortManager().sort_by_lower_cost_per_MWh(api_production_payload)
         sorted_powerplants = [e[1] for e in sorted_pairs_pp]
         load_production_plan = self.planner.plan(total_load, sorted_powerplants)
-        self.assertEqual(load_production_plan, expected_load_production_plan)
+        serialized_lpp = [e.model_dump() for e in load_production_plan]
+        self.assertEqual(serialized_lpp, expected_load_production_plan)
