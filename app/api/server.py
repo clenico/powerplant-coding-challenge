@@ -20,6 +20,7 @@ class ApiServer():
 
         @router.post("/productionplan")
         def plan_production(payload: dict):
+            # TODO should encapsulate this logic
             parser = ApiProductionPlanPayloadParser()
             merit_sorter = MeritSortManager()
             planner = LoadPlannerGreedy()
